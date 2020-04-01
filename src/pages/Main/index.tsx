@@ -1,10 +1,9 @@
 import React from 'react';
 
-
 const request = require('request');
 const convert = require('xml-js');
 
-function Main() {
+const Main: React.FC = () => {
     const url = 'http://apis.data.go.kr/1611000/LuArinfoService/attr/getLuLuinfoAttrList';
     let queryParams = '?' + encodeURIComponent('ServiceKey') + '=CJc1eCI%2BlQBdxfrnhKxrK%2BKHE8MMSUkMw7R8inyl1m%2BWcFiTd1Wv7iLVaOq3IECUnn40xW1zj%2Fotcnv5qMs1%2FQ%3D%3D'; /* Service Key*/
     queryParams += '&' + encodeURIComponent('ServiceKey') + '=' + encodeURIComponent('-'); /* 공공데이터포털에서 받은 인증키 */
@@ -17,7 +16,7 @@ function Main() {
     request({
         url: url + queryParams,
         method: 'GET'
-    }, function (error, response, body) {
+    }, function ({error, response, body}: any) {
         if (response.statusCode === 200) {
             var xmlToJson = convert.xml2json(body, { compact: true, spaces: 4 });
             console.log(JSON.parse(xmlToJson))
@@ -26,11 +25,19 @@ function Main() {
         // console.log('Headers', JSON.stringify(response.headers));
         // console.log('Reponse received', JSON.stringify(body));
     });
-    return (
-        <div>
 
-        </div>
-    );
+    return (
+        <div></div>
+    )
 }
+
+// function Main() {
+    
+//     return (
+//         <div>
+
+//         </div>
+//     );
+// }
 
 export default Main;

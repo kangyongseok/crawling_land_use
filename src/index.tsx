@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from './pages/Main';
-import * as serviceWorker from './serviceWorker';
+// import * as serviceWorker from './serviceWorker';
+
+const serviceWorker = require('./serviceWorker')
 
 ReactDOM.render(
   <React.StrictMode>
