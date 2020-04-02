@@ -8,6 +8,11 @@ export default function index() {
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPage, setTotalPage] = useState(0);
     const [data, setData] = useState([]);
+    useEffect(() => {
+        console.log(currentPage)
+        console.log(totalPage)
+        console.log(data)
+    })
 
     const url = 'http://apis.data.go.kr/1611000/LuArinfoService/attr/getLuLuinfoAttrList';
     let queryParams = '?' + encodeURIComponent('ServiceKey') + '=CJc1eCI%2BlQBdxfrnhKxrK%2BKHE8MMSUkMw7R8inyl1m%2BWcFiTd1Wv7iLVaOq3IECUnn40xW1zj%2Fotcnv5qMs1%2FQ%3D%3D'; /* Service Key*/
@@ -25,6 +30,9 @@ export default function index() {
         if (response.statusCode === 200) {
             var xmlToJson = convert.xml2json(body, { compact: true, spaces: 4 });
             console.log(JSON.parse(xmlToJson))
+            setCurrentPage(xmlToJson.response.pageNo._text)
+            setTotalPage(xmlToJson.response.numOfRows._text)
+            setData(xmlToJson.response.fileds.filed)
         }
         // console.log('Status', response.statusCode);
         // console.log('Headers', JSON.stringify(response.headers));
